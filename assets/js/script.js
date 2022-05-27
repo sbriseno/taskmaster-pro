@@ -204,16 +204,16 @@ $(".card .list-group").sortable({
   tolerance: "pointer",
   helper: "clone",
   activate: function(event) {
-    console.log("activate", this);
+    console.log("activate", this.addClass("dropover"));
   },
   deactivate: function(event) {
-    console.log("deactivate", this);
+    console.log("deactivate", this.removeClass("dropover"));
   },
   over: function(event) {
-    console.log("over", event.target);
+    console.log("over", event.target.addClass("dropover-active"));
   },
   out: function(event) {
-    console.log("out", event.target);
+    console.log("out", event.target.removeClass("dropover-active"));
   },
   update: function(event) {
     // array to store the task data in
@@ -443,3 +443,10 @@ $("#trash").droppable({
 $("#modalDueDate").datepicker({
   minDate:1
 });
+
+setInterval(function () {
+  $(".card .list-group-item").each(function(index, el) {
+    auditTask(el);
+  });
+}, 5000);
+
